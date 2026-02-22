@@ -1,35 +1,58 @@
-# PaolozkyBot Ultra Optimizations ??
+# PaolozkyBot Ultra Optimizations 🚀
 
-Este repositorio contiene los scripts de optimizaci�n definitivos para usuarios avanzados, gamers y desarrolladores.
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Version](https://img.shields.io/badge/Version-v9.1--God--Mode-gold.svg)
+![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-blue.svg)
 
-## ?? Scripts Incluidos
+**PaolozkyBot Ultra Optimizations** es la suite definitiva de scripts para transformar una instalación estándar de Windows en una estación de alto rendimiento para **Gamers, Desarrolladores y Power Users**. 
 
-### 1. scripts/turbo_gaming.ps1 (v5.0)
-*   **Kernel:** Interrupt Affinity (GPU/NIC), MSI Mode, CPU Unparking.
-*   **Red:** Network Throttling Kill, DNS Cloudflare/Google.
-
-### 2. scripts/minimalist_hacker.ps1 (v6.0)
-*   **Look:** Classic Context Menu, Dark Mode, Taskbar Cleanup.
-
-### 3. scripts/absolute_zero.ps1 (v7.0)
-*   **Purity:** Hibernation Kill, Auto-Maintenance Disable, Long Paths.
-
-### 4. scripts/ghost_protocol.ps1 (v8.0)
-*   **Privacy:** Deep Telemetry Kill, NVIDIA Shader Cache Unlimited.
-
-### 5. scripts/system_ascension.ps1 (v9.0)
-*   **Latency:** Force Timer Resolution 0.5ms.
-*   **RAM:** IO Page Lock Limit and Pool Usage optimization.
-*   **Clean:** Disable background Google/Edge updaters.
-
-## ?? Instalaci�n R�pida
-Ejecuta todos los scripts como Administrador y **reinicia**.
-
-## ?? Nivel Dios: BIOS (Hardware Only)
-Para el rendimiento m�ximo absoluto, verifica esto en tu BIOS:
-1.  **XMP/DOCP:** Aseg�rate de que tu RAM est� a su velocidad nominal (ej: 3200MHz) y no a 2133MHz.
-2.  **Re-Size BAR:** Act�valo para que la 3080 Ti acceda a toda la VRAM de una vez.
-3.  **PBO (Precision Boost Overdrive):** Act�valo para que tu Ryzen 3600 maneje mejor las frecuencias de boost.
+Diseñado específicamente para maximizar el potencial de hardware de élite como la **RTX 3080 Ti** y procesadores **Ryzen**, este repositorio ataca los cuellos de botella del Kernel que Microsoft deja por defecto.
 
 ---
-Hecho con ?? por **PaolozkyBot** ??
+
+## ⚡ Características Principales (Nivel Dios)
+
+### 🎮 Gaming & Latencia (v9.0+)
+- **Interrupt Affinity:** Aísla la GPU y la Red en núcleos exclusivos para eliminar micro-stuttering.
+- **MSI Mode:** Forza el modo *Message Signaled Interrupts* en la GPU para reducir el input lag.
+- **BCD Tweaks:** Desactiva el HPET y activa el *Dynamic Tick Kill* para una precisión de 0.5ms en el Timer del sistema.
+- **Network Divinity:** Deshabilita el *Network Throttling* y optimiza el stack TCP (CTCP/ECN) para un PING ultra-estable.
+
+### 🕶️ Interfaz & Look
+- **Minimalist Hacker:** Restaura el menú contextual clásico (Win10 style) y elimina toda la basura de la barra de tareas.
+- **Dark Mode Absolute:** Fuerza el modo oscuro en cada rincón del sistema.
+- **Kill Bing:** Elimina las sugerencias de internet en el menú Inicio para una búsqueda local instantánea.
+
+### ❄️ Pureza del Sistema
+- **Absolute Zero:** Elimina la hibernación (liberando GBs de espacio) y detiene el mantenimiento automático intrusivo.
+- **Ghost Protocol:** Bloquea la telemetría profunda de Microsoft y NVIDIA a nivel de registro y archivo HOSTS.
+- **SSD Optimization:** Forza el ReTrim y optimiza el Master File Table (MFT) para accesos ultra-rápidos.
+
+---
+
+## 🚀 Cómo Usar (Instalación en 1-Clic)
+
+Para facilitar el uso a cualquier usuario, hemos incluido una **Interfaz Gráfica (GUI)**:
+
+1.  **Descarga el repositorio** (Download ZIP o `git clone`).
+2.  Entra en la carpeta y busca el archivo **`Lanzador-Nivel-Dios.bat`**.
+3.  Haz doble clic y acepta los permisos de Administrador.
+4.  Selecciona los módulos que quieras y dale al botón **¡OPTIMIZAR AHORA!**.
+5.  **Reinicia tu PC** para que los cambios en el Kernel se asienten.
+
+---
+
+## 📁 Estructura del Tesoro
+- `scripts/turbo_gaming.ps1`: El motor de rendimiento (Kernel, Red, GPU).
+- `scripts/minimalist_hacker.ps1`: Transformación visual y minimalismo.
+- `scripts/absolute_zero.ps1`: Limpieza de basura sistémica y espacio.
+- `scripts/ghost_protocol.ps1`: Privacidad y bloqueo de telemetría.
+- `scripts/system_ascension.ps1`: Optimización de timers y RAM IO.
+
+---
+
+## ⚠️ Advertencia
+Este repositorio realiza cambios profundos en el Registro de Windows y la configuración del arranque (BCD). Se recomienda crear un punto de restauración antes de ejecutarlo. El autor no se hace responsable de explosiones de FPS o de que te llamen hacker en el Arena Breakout. ;)
+
+---
+Hecho con ❤️ por **PaolozkyBot** 💻🕶️🔥
