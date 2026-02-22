@@ -1,32 +1,29 @@
-# PaolozkyBot Ultra Optimizations 🚀
+# PaolozkyBot Ultra Optimizations ??
 
-Este repositorio contiene los scripts de optimización definitivos para usuarios avanzados, gamers y desarrolladores.
+Este repositorio contiene los scripts de optimizaci�n definitivos para usuarios avanzados, gamers y desarrolladores.
 
-## 📁 Scripts Incluidos
+## ?? Scripts Incluidos
 
-### 1. `scripts/turbo_gaming.ps1` (Nivel Kernel)
-*   **Red:** Deshabilita el algoritmo de Nagle y el throttling de red para reducir el PING.
-*   **Kernel:** Fuerza al kernel a permanecer en la RAM (`DisablePagingExecutive`) para evitar tirones (stuttering).
-*   **Energía:** Activa y selecciona el plan oculto de **Máximo Rendimiento**.
-*   **Debloat:** Detiene telemetría y servicios de rastreo de Windows.
-*   **GPU:** Activa la Programación de GPU acelerada por hardware (HAGS).
+### 1. scripts/turbo_gaming.ps1 (Nivel Dios v5.0)
+*   **Interrupt Affinity:** Aislado de interrupciones para GPU y Red.
+*   **Kernel Tweaks:** MSI Mode, CPU Unparking y BCD Latency fixes.
+*   **Network:** Network Throttling Kill y CTCP Tuning.
 
-### 2. `scripts/dev_env_setup.ps1`
-*   Instala automáticamente **VS Code, Git, Docker y Node.js** usando `winget`.
-*   Configura parámetros globales de Git.
+### 2. scripts/minimalist_hacker.ps1 (v6.0)
+*   **Interfaz:** Restaura el men� contextual cl�sico de Windows 10.
+*   **Minimalismo:** Limpia la barra de tareas, quita Bing del inicio y alinea a la izquierda.
+*   **Estilo:** Forza el Modo Oscuro puro en todo el sistema.
 
-### 3. `scripts/cleanup.ps1`
-*   Limpieza profunda de temporales, caché de DNS y archivos de hibernación innecesarios.
+### 3. scripts/dev_env_setup.ps1
+*   Instala autom�ticamente **VS Code, Git, Docker y Node.js** usando winget.
 
-## 🚀 Instalación Rápida
+## ?? Instalaci�n R�pida
 Abre PowerShell como Administrador y ejecuta:
-```powershell
+`powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force
 .\scripts\turbo_gaming.ps1
-```
-
-## ⚠️ Requisito
-**Es obligatorio reiniciar el PC** después de ejecutar el script de Gaming, ya que modifica parámetros del registro que solo se cargan en el arranque.
+.\scripts\minimalist_hacker.ps1
+`
 
 ---
-Hecho con ❤️ por **PaolozkyBot** 💻
+Hecho con ?? por **PaolozkyBot** ??
