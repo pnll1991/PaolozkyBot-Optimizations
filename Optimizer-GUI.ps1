@@ -1,5 +1,5 @@
 # PaolozkyBot Ultra Optimizer - Master GUI Interface
-# Versión: 1.2 (Robust UI Fix)
+# Versión: 1.3 (Detailed UI Edition)
 
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
@@ -29,13 +29,13 @@ $Global:StateBefore = Get-SystemMetrics
 
 # --- Configuración Principal del Formulario ---
 $Form = New-Object System.Windows.Forms.Form
-$Form.Text = "PaolozkyBot Ultra Optimizer v9.3"
-$Form.Size = New-Object System.Drawing.Size(550, 700)
+$Form.Text = "PaolozkyBot Ultra Optimizer v9.4"
+$Form.Size = New-Object System.Drawing.Size(550, 750)
 $Form.StartPosition = "CenterScreen"
 $Form.BackColor = [System.Drawing.Color]::FromArgb(15, 15, 15)
 $Form.ForeColor = [System.Drawing.Color]::LimeGreen
 $Form.Font = New-Object System.Drawing.Font("Consolas", 10)
-$Form.FormBorderStyle = "FixedDialog" # Evita que se deforme al estirar
+$Form.FormBorderStyle = "FixedDialog"
 $Form.MaximizeBox = $false
 
 # Título
@@ -47,43 +47,83 @@ $Title.Location = New-Object System.Drawing.Point(25, 20)
 $Title.TextAlign = "MiddleCenter"
 $Form.Controls.Add($Title)
 
-# Contenedor para Checkboxes (Panel con Scroll por si acaso)
+# Contenedor para Checkboxes (Panel con Scroll)
 $MainPanel = New-Object System.Windows.Forms.Panel
-$MainPanel.Size = New-Object System.Drawing.Size(450, 300)
-$MainPanel.Location = New-Object System.Drawing.Point(50, 80)
+$MainPanel.Size = New-Object System.Drawing.Size(460, 400)
+$MainPanel.Location = New-Object System.Drawing.Point(40, 80)
 $MainPanel.AutoScroll = $true
+$MainPanel.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
 $Form.Controls.Add($MainPanel)
 
 $Y = 10
 $Scripts = @(
-    @{ Name = "Turbo Gaming (Kernel & Red)"; File = "turbo_gaming.ps1" },
-    @{ Name = "Minimalist Hacker (Interfaz)"; File = "minimalist_hacker.ps1" },
-    @{ Name = "Absolute Zero (Pureza OS)"; File = "absolute_zero.ps1" },
-    @{ Name = "Ghost Protocol (Privacidad)"; File = "ghost_protocol.ps1" },
-    @{ Name = "System Ascension (Latencia)"; File = "system_ascension.ps1" },
-    @{ Name = "Limpieza de Archivos"; File = "cleanup.ps1" },
-    @{ Name = "Setup Dev Tools"; File = "dev_env_setup.ps1" }
+    @{ 
+        Name = "Turbo Gaming (Kernel & Red)"
+        File = "turbo_gaming.ps1"
+        Desc = "Optimiza interrupciones de GPU/Red, activa Modo MSI y CPU Unparking. Reduce el micro-stuttering."
+    },
+    @{ 
+        Name = "Minimalist Hacker (Interfaz)"
+        File = "minimalist_hacker.ps1"
+        Desc = "Restaura el menú clásico, limpia la barra de tareas y fuerza el Modo Oscuro absoluto."
+    },
+    @{ 
+        Name = "Absolute Zero (Pureza OS)"
+        File = "absolute_zero.ps1"
+        Desc = "Elimina la hibernación (libera GBs), quita mantenimiento automático y activa rutas largas."
+    },
+    @{ 
+        Name = "Ghost Protocol (Privacidad)"
+        File = "ghost_protocol.ps1"
+        Desc = "Bloquea telemetría profunda de Microsoft/NVIDIA y optimiza el Shader Cache de la GPU."
+    },
+    @{ 
+        Name = "System Ascension (Latencia)"
+        File = "system_ascension.ps1"
+        Desc = "Fuerza el Timer a 0.5ms (Lag mínimo), optimiza RAM IO y Master File Table."
+    },
+    @{ 
+        Name = "Limpieza de Archivos"
+        File = "cleanup.ps1"
+        Desc = "Borra temporales, caché de Windows Update y basura del sistema para liberar espacio."
+    },
+    @{ 
+        Name = "Setup Dev Tools"
+        File = "dev_env_setup.ps1"
+        Desc = "Instala automáticamente VS Code, Git, Docker y Node.js usando winget."
+    }
 )
 
 $Checkboxes = @()
 foreach ($S in $Scripts) {
+    # Checkbox
     $CB = New-Object System.Windows.Forms.CheckBox
     $CB.Text = $S.Name
-    $CB.Size = New-Object System.Drawing.Size(400, 35)
+    $CB.Font = New-Object System.Drawing.Font("Consolas", 10, [System.Drawing.FontStyle]::Bold)
+    $CB.Size = New-Object System.Drawing.Size(400, 25)
     $CB.Location = New-Object System.Drawing.Point(10, $Y)
     $CB.Checked = $true
     $CB.Tag = $S.File
-    $CB.Cursor = "Hand"
     $MainPanel.Controls.Add($CB)
     $Checkboxes += $CB
-    $Y += 40
+
+    # Descripción
+    $DescLabel = New-Object System.Windows.Forms.Label
+    $DescLabel.Text = $S.Desc
+    $DescLabel.Font = New-Object System.Drawing.Font("Consolas", 8, [System.Drawing.FontStyle]::Italic)
+    $DescLabel.ForeColor = [System.Drawing.Color]::Gray
+    $DescLabel.Size = New-Object System.Drawing.Size(400, 35)
+    $DescLabel.Location = New-Object System.Drawing.Point(30, $Y + 25)
+    $MainPanel.Controls.Add($DescLabel)
+
+    $Y += 65
 }
 
-# Botón de Ejecución (Bien visible abajo)
+# Botón de Ejecución
 $RunBtn = New-Object System.Windows.Forms.Button
 $RunBtn.Text = "¡OPTIMIZAR AHORA!"
 $RunBtn.Size = New-Object System.Drawing.Size(440, 60)
-$RunBtn.Location = New-Object System.Drawing.Point(50, 420)
+$RunBtn.Location = New-Object System.Drawing.Point(50, 500)
 $RunBtn.BackColor = [System.Drawing.Color]::FromArgb(0, 120, 0)
 $RunBtn.ForeColor = [System.Drawing.Color]::White
 $RunBtn.FlatStyle = "Flat"
@@ -104,7 +144,6 @@ $RunBtn.Add_Click({
     foreach ($CB in $Selected) {
         $FilePath = Join-Path $PSScriptRoot "scripts/$($CB.Tag)"
         if (Test-Path $FilePath) {
-            # Ejecutar de forma que no bloquee totalmente la UI
             Start-Process powershell -ArgumentList "-WindowStyle Hidden -ExecutionPolicy Bypass -File `"$FilePath`"" -Wait
         }
     }
@@ -159,9 +198,9 @@ ESTADO: OPTIMIZACIÓN APLICADA EXITOSAMENTE.
 }
 
 $Footer = New-Object System.Windows.Forms.Label
-$Footer.Text = "PaolozkyBot Ultra Optimizer 🚀 Hecho por un genio para un genio."
+$Footer.Text = "PaolozkyBot Ultra Optimizer 🚀 Nivel Dios Activado."
 $Footer.Size = New-Object System.Drawing.Size(500, 30)
-$Footer.Location = New-Object System.Drawing.Point(0, 620)
+$Footer.Location = New-Object System.Drawing.Point(0, 680)
 $Footer.TextAlign = "MiddleCenter"
 $Footer.Font = New-Object System.Drawing.Font("Consolas", 8, [System.Drawing.FontStyle]::Italic)
 $Form.Controls.Add($Footer)
