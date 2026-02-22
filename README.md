@@ -1,8 +1,17 @@
 # PaolozkyBot Ultra Optimizations 🚀
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Version](https://img.shields.io/badge/Version-v9.1--God--Mode-gold.svg)
+![Version](https://img.shields.io/badge/Version-v9.2--God--Mode-gold.svg)
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-blue.svg)
+
+---
+
+## 📥 DESCARGA DIRECTA (Recomendado)
+Para la mejor experiencia, descarga el paquete completo listo para usar:
+
+[**➔ DESCARGAR PaolozkyBot-Optimizer-v9.2.zip**](https://github.com/pnll1991/PaolozkyBot-Optimizations/releases/download/v9.2/PaolozkyBot-Optimizations-v9.2.zip)
+
+---
 
 **PaolozkyBot Ultra Optimizations** es la suite definitiva de scripts para transformar una instalación estándar de Windows en una estación de alto rendimiento para **Gamers, Desarrolladores y Power Users**. 
 
@@ -34,11 +43,12 @@ Diseñado específicamente para maximizar el potencial de hardware de élite com
 
 Para facilitar el uso a cualquier usuario, hemos incluido una **Interfaz Gráfica (GUI)**:
 
-1.  **Descarga el repositorio** (Download ZIP o `git clone`).
-2.  Entra en la carpeta y busca el archivo **`Lanzador-Nivel-Dios.bat`**.
-3.  Haz doble clic y acepta los permisos de Administrador.
-4.  Selecciona los módulos que quieras y dale al botón **¡OPTIMIZAR AHORA!**.
-5.  **Reinicia tu PC** para que los cambios en el Kernel se asienten.
+1.  **Descarga el archivo ZIP** desde el link de arriba.
+2.  Descomprime la carpeta.
+3.  Busca el archivo **`Lanzador-Nivel-Dios.bat`**.
+4.  Haz doble clic y acepta los permisos de Administrador.
+5.  Selecciona los módulos que quieras y dale al botón **¡OPTIMIZAR AHORA!**.
+6.  **Reinicia tu PC** para que los cambios en el Kernel se asienten.
 
 ---
 
