@@ -43,7 +43,6 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\M
 
 # 6. VISUALES Y UI (Performance over Appearance)
 Write-Host "[6/8] Optimizando efectos visuales para rendimiento..." -ForegroundColor Yellow
-# Desactivar transparencia y animaciones de ventana (solo registro para velocidad)
 Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "UserPreferencesMask" -Value ([byte[]](0x90,0x12,0x03,0x80,0x10,0x00,0x00,0x00)) -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ListviewAlphaSelect" -Value 0 -Force
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarAnimations" -Value 0 -Force
@@ -63,4 +62,4 @@ foreach ($path in $tmpPaths) {
 }
 
 Write-Host "`n--- OPTIMIZACIÓN NIVEL DIOS v2.2 COMPLETADA ---" -ForegroundColor Cyan
-Write-Host "Nota: Los cambios en el registro y servicios requieren REINICIAR el PC." -ForegroundColor Red
+Write-Host "Nota: Los cambios requieren REINICIAR el PC." -ForegroundColor Red
