@@ -1,43 +1,80 @@
 # PaolozkyBot Ultra Optimization Script 🚀
-# Version: 5.0 - "SYSTEM TRANSCENDENCE" (Interrupt Affinity & Power Throttling Kill)
-Write-Host "--- Iniciando PaolozkyBot Ultra Optimization (v5.0) ---" -ForegroundColor Cyan
+# Version: 10.0 - "UNIVERSAL ASCENSION" (Hardware Agnostic Edition)
+Write-Host "--- Iniciando PaolozkyBot Ultra Optimization (v10.0) ---" -ForegroundColor Cyan
 
-# 1. INTERRUPT AFFINITY (Core Isolation for GPU & NIC)
-Write-Host "[1/5] Aislado de interrupciones para GPU y Red (Core Affinity)..." -ForegroundColor Yellow
-# GPU: RTX 3080 Ti -> Threads 10 y 11 (Mascara: 3072)
-$gpuPath = "HKLM:\SYSTEM\CurrentControlSet\Enum\PCI\VEN_10DE&DEV_2208&SUBSYS_220810B0&REV_A1\4&1FC990D7&0&0019\Device Parameters\Interrupt Management\Affinity Policy"
-if (-not (Test-Path $gpuPath)) { New-Item -Path $gpuPath -Force | Out-Null }
-Set-ItemProperty -Path $gpuPath -Name "DevicePolicy" -Value 4 -Type DWord -Force
-Set-ItemProperty -Path $gpuPath -Name "AssignmentSet" -Value 3072 -Type QWord -Force
+# --- LÓGICA DE DETECCIÓN DE HARDWARE ---
+$CPU = Get-CimInstance Win32_Processor
+$Threads = $CPU.NumberOfLogicalProcessors
+Write-Host "[INFO] Detectados $Threads hilos de CPU." -ForegroundColor Gray
 
-# NIC: Realtek GbE -> Threads 8 y 9 (Mascara: 768)
-$nicPath = "HKLM:\SYSTEM\CurrentControlSet\Enum\PCI\VEN_10EC&DEV_8168&SUBSYS_E0001458&REV_0C\01000000684CE00000\Device Parameters\Interrupt Management\Affinity Policy"
-if (-not (Test-Path $nicPath)) { New-Item -Path $nicPath -Force | Out-Null }
-Set-ItemProperty -Path $nicPath -Name "DevicePolicy" -Value 4 -Type DWord -Force
-Set-ItemProperty -Path $nicPath -Name "AssignmentSet" -Value 768 -Type QWord -Force
+# Calcular Máscaras de Afinidad (Usar los últimos hilos para evitar conflictos con Core 0)
+# GPU: Últimos 2 hilos
+$GPUMask = [Math]::Pow(2, $Threads - 1) + [Math]::Pow(2, $Threads - 2)
+# NIC: Penúltimos 2 hilos
+$NICMask = [Math]::Pow(2, $Threads - 3) + [Math]::Pow(2, $Threads - 4)
 
-# 2. POWER THROTTLING KILL (Global Disable)
-Write-Host "[2/5] Desactivando Power Throttling global (Zero Background Latency)..." -ForegroundColor Yellow
-$powerPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling"
-if (-not (Test-Path $powerPath)) { New-Item -Path $powerPath -Force | Out-Null }
-Set-ItemProperty -Path $powerPath -Name "PowerThrottlingOff" -Value 1 -Type DWord -Force
+# 1. INTERRUPT AFFINITY & MSI MODE (Universal)
+Write-Host "[1/5] Optimizando Afinidad de Interrupciones y MSI Mode..." -ForegroundColor Yellow
 
-# 3. ADVANCED SYSTEM CACHE (Extreme Multitasking)
-Write-Host "[3/5] Elevando prioridad de Cache de Sistema y Working Set..." -ForegroundColor Yellow
-Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "SystemCacheLimit" -Value 1024 -ErrorAction SilentlyContinue
+# --- Buscar GPU NVIDIA ---
+$GPU = Get-PnpDevice -Class Display | Where-Object { $_.Manufacturer -like "*NVIDIA*" -and $_.Status -eq "OK" }
+if ($GPU) {
+    foreach ($dev in $GPU) {
+        $Instance = $dev.InstanceId
+        Write-Host "[GPU] Aplicando afinidad a: $($dev.FriendlyName)" -ForegroundColor Green
+        
+        # MSI Mode Enable
+        $msiPath = "HKLM:\SYSTEM\CurrentControlSet\Enum\$Instance\Device Parameters\Interrupt Management\MessageSignaledInterruptProperties"
+        if (-not (Test-Path $msiPath)) { New-Item -Path $msiPath -Force | Out-Null }
+        Set-ItemProperty -Path $msiPath -Name "MSISupported" -Value 1 -Force
+        
+        # Affinity Policy
+        $affPath = "HKLM:\SYSTEM\CurrentControlSet\Enum\$Instance\Device Parameters\Interrupt Management\Affinity Policy"
+        if (-not (Test-Path $affPath)) { New-Object -TypeName PSObject | Out-Null; New-Item -Path $affPath -Force | Out-Null }
+        Set-ItemProperty -Path $affPath -Name "DevicePolicy" -Value 4 -Force # IrqPolicySpecifiedProcessors
+        Set-ItemProperty -Path $affPath -Name "AssignmentSet" -Value $GPUMask -Type QWord -Force
+    }
+}
 
-# 4. NETWORK STACK DEEP TUNE (CTCP & ECN)
-Write-Host "[4/5] Optimizando Stack de Red (CTCP, ECN y Window Auto-Tuning)..." -ForegroundColor Yellow
+# --- Buscar Adaptador de Red Principal ---
+$NIC = Get-PnpDevice -Class Net | Where-Object { $_.Status -eq "OK" -and ($_.FriendlyName -like "*Ethernet*" -or $_.FriendlyName -like "*GbE*" -or $_.FriendlyName -like "*Wi-Fi*") }
+if ($NIC) {
+    $dev = $NIC | Select-Object -First 1 # Solo el principal
+    $Instance = $dev.InstanceId
+    Write-Host "[NET] Aplicando afinidad a: $($dev.FriendlyName)" -ForegroundColor Green
+    
+    $affPath = "HKLM:\SYSTEM\CurrentControlSet\Enum\$Instance\Device Parameters\Interrupt Management\Affinity Policy"
+    if (-not (Test-Path $affPath)) { New-Item -Path $affPath -Force | Out-Null }
+    Set-ItemProperty -Path $affPath -Name "DevicePolicy" -Value 4 -Force
+    Set-ItemProperty -Path $affPath -Name "AssignmentSet" -Value $NICMask -Type QWord -Force
+}
+
+# 2. POWER THROTTLING & UNPARKING (Universal)
+Write-Host "[2/5] Desactivando Power Throttling y Core Parking..." -ForegroundColor Yellow
+$ptPath = "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling"
+if (-not (Test-Path $ptPath)) { New-Item -Path $ptPath -Force | Out-Null }
+Set-ItemProperty -Path $ptPath -Name "PowerThrottlingOff" -Value 1 -Force
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Power\PowerSettings\54533251-82be-4824-96c1-47b60b740d00\0cc5b647-c1df-4637-891a-dec35c318583" -Name "Attributes" -Value 0
+
+# 3. KERNEL & ENERGY (Ultimate Performance)
+Write-Host "[3/5] Forzando Kernel en RAM y Ultimate Performance..." -ForegroundColor Yellow
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" -Name "DisablePagingExecutive" -Value 1 -Force
+$ultimateGuid = "e9a42b02-d5df-448d-aa00-03f14749eb61"
+powercfg -duplicatescheme $ultimateGuid | Out-Null
+$targetPlan = powercfg -list | Select-String "Máximo rendimiento" | Select-Object -First 1
+if ($targetPlan) { $guid = $targetPlan.ToString().Split()[3]; powercfg -setactive $guid }
+
+# 4. NETWORK STACK (Universal Tuning)
+Write-Host "[4/5] Optimizando Stack de Red y DNS..." -ForegroundColor Yellow
 netsh int tcp set global autotuninglevel=normal
 netsh int tcp set global ecncapability=enabled
 netsh int tcp set global timestamps=disabled
-netsh int tcp set global initialrto=2000
-netsh int tcp set global rsc=enabled
-netsh int tcp set global nonsackrttresiliency=disabled
-
-# 5. DNS OPTIMIZATION (Adapter Level)
-Write-Host "[5/5] Forzando DNS de Cloudflare/Google para baja latencia..." -ForegroundColor Yellow
 Get-NetAdapter | Set-DnsClientServerAddress -ServerAddresses ("1.1.1.1", "8.8.8.8") -ErrorAction SilentlyContinue
 
-Write-Host "`n--- NIVEL DIOS v5.0: SYSTEM TRANSCENDENCE COMPLETADA ---" -ForegroundColor Cyan
-Write-Host "LOS CAMBIOS DE INTERRUPT AFFINITY REQUIEREN REINICIO PARA SURTIR EFECTO." -ForegroundColor Red
+# 5. PRIORIDAD AUTOMATICA (Arena Breakout Fix)
+Write-Host "[5/5] Configurando prioridades de CPU para juegos..." -ForegroundColor Yellow
+$imagePath = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\UAGame.exe\PerfOptions"
+if (-not (Test-Path $imagePath)) { New-Item -Path $imagePath -Force | Out-Null }
+Set-ItemProperty -Path $imagePath -Name "CpuPriorityClass" -Value 3 -Force # 3 = High
+
+Write-Host "`n--- NIVEL DIOS v10.0: UNIVERSAL ASCENSION COMPLETADA ---" -ForegroundColor Cyan
