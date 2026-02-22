@@ -1,15 +1,15 @@
 # PaolozkyBot Ultra Optimizations 🚀
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Version](https://img.shields.io/badge/Version-v9.2--God--Mode-gold.svg)
+![Version](https://img.shields.io/badge/Version-v9.3--God--Mode-gold.svg)
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-blue.svg)
 
 ---
 
 ## 📥 DESCARGA DIRECTA (Recomendado)
-Para la mejor experiencia, descarga el paquete completo listo para usar:
+Para la mejor experiencia, descarga el paquete completo con la nueva interfaz corregida:
 
-[**➔ DESCARGAR PaolozkyBot-Optimizer-v9.2.zip**](https://github.com/pnll1991/PaolozkyBot-Optimizations/releases/download/v9.2/PaolozkyBot-Optimizations-v9.2.zip)
+[**➔ DESCARGAR PaolozkyBot-Optimizer-v9.3.zip**](https://github.com/pnll1991/PaolozkyBot-Optimizations/releases/download/v9.3/PaolozkyBot-Optimizer-v9.3.zip)
 
 ---
 
@@ -21,27 +21,23 @@ Diseñado específicamente para maximizar el potencial de hardware de élite com
 
 ## ⚡ Características Principales (Nivel Dios)
 
-### 🎮 Gaming & Latencia (v9.0+)
+### 🎮 Gaming & Latencia (v9.3+)
+- **NUEVO: Interfaz Gráfica (GUI) v9.3:** Layout robusto con soporte para scroll y reporte comparativo post-optimización.
 - **Interrupt Affinity:** Aísla la GPU y la Red en núcleos exclusivos para eliminar micro-stuttering.
 - **MSI Mode:** Forza el modo *Message Signaled Interrupts* en la GPU para reducir el input lag.
 - **BCD Tweaks:** Desactiva el HPET y activa el *Dynamic Tick Kill* para una precisión de 0.5ms en el Timer del sistema.
-- **Network Divinity:** Deshabilita el *Network Throttling* y optimiza el stack TCP (CTCP/ECN) para un PING ultra-estable.
 
 ### 🕶️ Interfaz & Look
 - **Minimalist Hacker:** Restaura el menú contextual clásico (Win10 style) y elimina toda la basura de la barra de tareas.
 - **Dark Mode Absolute:** Fuerza el modo oscuro en cada rincón del sistema.
-- **Kill Bing:** Elimina las sugerencias de internet en el menú Inicio para una búsqueda local instantánea.
 
 ### ❄️ Pureza del Sistema
-- **Absolute Zero:** Elimina la hibernación (liberando GBs de espacio) y detiene el mantenimiento automático intrusivo.
-- **Ghost Protocol:** Bloquea la telemetría profunda de Microsoft y NVIDIA a nivel de registro y archivo HOSTS.
-- **SSD Optimization:** Forza el ReTrim y optimiza el Master File Table (MFT) para accesos ultra-rápidos.
+- **Absolute Zero:** Elimina la hibernación y detiene el mantenimiento automático intrusivo.
+- **Ghost Protocol:** Bloquea la telemetría profunda de Microsoft y NVIDIA.
 
 ---
 
 ## 🚀 Cómo Usar (Instalación en 1-Clic)
-
-Para facilitar el uso a cualquier usuario, hemos incluido una **Interfaz Gráfica (GUI)**:
 
 1.  **Descarga el archivo ZIP** desde el link de arriba.
 2.  Descomprime la carpeta.
@@ -53,16 +49,14 @@ Para facilitar el uso a cualquier usuario, hemos incluido una **Interfaz Gráfic
 ---
 
 ## 📁 Estructura del Tesoro
-- `scripts/turbo_gaming.ps1`: El motor de rendimiento (Kernel, Red, GPU).
-- `scripts/minimalist_hacker.ps1`: Transformación visual y minimalismo.
-- `scripts/absolute_zero.ps1`: Limpieza de basura sistémica y espacio.
-- `scripts/ghost_protocol.ps1`: Privacidad y bloqueo de telemetría.
-- `scripts/system_ascension.ps1`: Optimización de timers y RAM IO.
+- `scripts/`: Todos los módulos de optimización por separado.
+- `Optimizer-GUI.ps1`: El corazón visual del optimizador.
+- `Lanzador-Nivel-Dios.bat`: Lanzador con auto-elevación de privilegios.
 
 ---
 
 ## ⚠️ Advertencia
-Este repositorio realiza cambios profundos en el Registro de Windows y la configuración del arranque (BCD). Se recomienda crear un punto de restauración antes de ejecutarlo. El autor no se hace responsable de explosiones de FPS o de que te llamen hacker en el Arena Breakout. ;)
+Este repositorio realiza cambios profundos en el Registro de Windows. Se recomienda crear un punto de restauración antes de ejecutarlo.
 
 ---
 Hecho con ❤️ por **PaolozkyBot** 💻🕶️🔥
